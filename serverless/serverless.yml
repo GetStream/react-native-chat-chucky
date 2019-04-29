@@ -1,0 +1,44 @@
+service: <YOUR_SERVERLESS_APP>
+app: <YOUR_SERVERLESS_APP>
+tenant: <YOUR_SERVERLESS_TENANT>
+
+frameworkVersion: '>=1.32.0 <2.0.0'
+
+provider:
+    name: aws
+    runtime: nodejs8.10
+    stage: prod
+    region: us-east-1
+    memorySize: 3008
+    timeout: 30
+    environment:
+        STREAM_KEY: '<YOUR_STREAM_KEY>'
+        STREAM_SECRET: '<YOUR_STREAM_SECRET>'
+        STREAM_APP_ID: '<YOUR_STREAM_APP_ID'
+functions:
+    init:
+        handler: handler.init
+        events:
+            - http:
+                  path: /init
+                  method: post
+    reply:
+        handler: handler.reply
+        events:
+            - http:
+                  path: /reply
+                  method: post
+
+plugins:
+    - serverless-webpack
+    - serverless-offline
+
+custom:
+    webpack:
+        packager: 'yarn'
+        webpackConfig: 'webpack.config.js'
+        includeModules:
+            forceInclude:
+                - '@babel/runtime'
+    serverless-offline:
+        port: 8000
