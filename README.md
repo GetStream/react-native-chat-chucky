@@ -9,4 +9,4 @@
 - React Native
 
 **Tutorial:**
-https://medium.com/@nparsons08/react-native-chat-with-chuck-norris-dd5721523742
+https://hackernoon.com/react-native-chat-with-chuck-norris-dd5721523742
